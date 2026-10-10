@@ -6,6 +6,8 @@ const links = [
   { to: "/accounts", label: "Chart of Accounts" },
   { to: "/trial-balance", label: "Trial Balance" },
   { to: "/general-ledger", label: "General Ledger" },
+  { to: "/income-statement", label: "Income Statement" },
+  { to: "/balance-sheet", label: "Balance Sheet" },
   { to: "/periods", label: "Periods" },
 ];
 

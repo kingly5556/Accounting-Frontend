@@ -80,3 +80,35 @@ export type GeneralLedger = {
 };
 
 export type Me = { username: string; roles: string[] };
+
+export type StatementRow = { accountId: string; code: string; name: string; amount: string };
+
+export type IncomeStatement = {
+  from: string;
+  to: string;
+  revenues: StatementRow[];
+  expenses: StatementRow[];
+  totalRevenue: string;
+  totalExpense: string;
+  netIncome: string;
+};
+
+export type BalanceSheet = {
+  asOf: string;
+  assets: StatementRow[];
+  liabilities: StatementRow[];
+  equity: StatementRow[];
+  netIncomeToDate: string;
+  totalAssets: string;
+  totalLiabilities: string;
+  totalEquity: string;
+  balanced: boolean;
+};
+
+export type YearEndPreview = {
+  year: number;
+  canClose: boolean;
+  blockers: string[];
+  netIncome: string;
+  lines: { accountId: string; code: string; name: string; debit: string; credit: string }[];
+};

@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import { MeProvider } from "./lib/me";
+import { BalanceSheetPage } from "./pages/BalanceSheetPage";
 import { ChartOfAccountsPage } from "./pages/ChartOfAccountsPage";
 import { GeneralLedgerPage } from "./pages/GeneralLedgerPage";
+import { IncomeStatementPage } from "./pages/IncomeStatementPage";
 import { JournalEntriesPage } from "./pages/JournalEntriesPage";
 import { JournalEntryDetailPage } from "./pages/JournalEntryDetailPage";
 import { JournalEntryFormPage } from "./pages/JournalEntryFormPage";
@@ -26,6 +28,8 @@ export default function App() {
             <Route path="journal-entries/:id/edit" element={<JournalEntryFormPage />} />
             <Route path="accounts" element={<ChartOfAccountsPage />} />
             <Route path="trial-balance" element={<TrialBalancePage />} />
+            <Route path="income-statement" element={<IncomeStatementPage />} />
+            <Route path="balance-sheet" element={<BalanceSheetPage />} />
             <Route path="general-ledger" element={<GeneralLedgerPage />} />
             <Route path="periods" element={<PeriodsPage />} />
           </Route>

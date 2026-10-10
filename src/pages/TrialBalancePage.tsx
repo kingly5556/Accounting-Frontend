@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { api } from "../lib/api";
+import { api, exportUrl } from "../lib/api";
 import { todayBangkok } from "../lib/dates";
 import { formatSatang } from "../lib/money";
 import { useAsync } from "../lib/useAsync";
@@ -17,6 +17,9 @@ export function TrialBalancePage() {
           As of
           <input type="date" value={asOf} onChange={(e) => e.target.value && setAsOf(e.target.value)} />
         </label>
+        <a href={exportUrl("trial-balance", { asOf })} download>
+          <button type="button" className="secondary">Export Excel</button>
+        </a>
       </div>
       {error && <div className="error-banner">{error}</div>}
       {loading && <p className="muted">Loading…</p>}

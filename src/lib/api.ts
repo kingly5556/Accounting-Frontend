@@ -1,6 +1,8 @@
 import type {
   Account,
   AccountType,
+  BalanceSheet,
+  IncomeStatement,
   GeneralLedger,
   JournalEntry,
   JournalEntrySummary,
@@ -8,6 +10,7 @@ import type {
   Me,
   Period,
   TrialBalance,
+  YearEndPreview,
 } from "../types";
 
 // BASE_URL is "/" in dev (Vite proxies /api to the backend directly) and
@@ -71,9 +74,21 @@ export const api = {
     list: () => request<Period[]>("/periods"),
     close: (period: string) => request<Period>(`/periods/${period}/close`, json("POST")),
   },
+  yearEnd: {
+    preview: (year: number) => request<YearEndPreview>(`/year-end/${year}/preview`),
+    close: (year: number) => request<{ year: number; entryNo: string | null; netIncome: string }>(`/year-end/${year}/close`, json("POST")),
+  },
   reports: {
     trialBalance: (asOf: string) => request<TrialBalance>(`/reports/trial-balance?asOf=${asOf}`),
+    incomeStatement: (from: string, to: string) =>
+      request<IncomeStatement>(`/reports/income-statement?from=${from}&to=${to}`),
+    balanceSheet: (asOf: string) => request<BalanceSheet>(`/reports/balance-sheet?asOf=${asOf}`),
     generalLedger: (accountId: string, from: string, to: string) =>
       request<GeneralLedger>(`/reports/general-ledger/${accountId}?from=${from}&to=${to}`),
   },
 };
+
+/** URL of an Excel export. A plain link works: the browser sends the ERPHUB session cookie. */
+export function exportUrl(report: "trial-balance" | "income-statement" | "balance-sheet", params: Record<string, string>) {
+  return `${API_BASE}/reports/${report}.xlsx?${new URLSearchParams(params)}`;
+}
